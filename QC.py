@@ -1,11 +1,13 @@
+from matplotlib import pyplot as plt
 from qiskit import QuantumCircuit
-from qiskit.primitives import StatevectorSampler
+from qiskit.circuit.library import HGate, MCXGate
 
-qc = QuantumCircuit(2)
-qc.h(0)
-qc.cx(0, 1)
-qc.measure_all()
+mcx_gate = MCXGate(3)
+hadamard_gate = HGate()
 
-sampler = StatevectorSampler()
-result = sampler.run([qc], shots=1024).result()
-print(result[0].data.meas.get_counts())
+qc = QuantumCircuit(4)
+qc.append(hadamard_gate, [0])
+qc.append(mcx_gate, [0, 1, 2, 3])
+qc.draw("mpl")
+
+plt.show()
