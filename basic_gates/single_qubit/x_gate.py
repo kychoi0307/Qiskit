@@ -9,8 +9,7 @@ qc.x(0) #0번 qubit에 X-gate 적용
 
 qc.measure(0,0) #0번 qubit의 측정결과를 0번 classical bit에 저장
 
-circuit_figure = qc.draw("mpl")
-circuit_figure.savefig("results/x_gate_circuit.png")
+qc.draw("mpl")
 plt.show()
 
 simulator = AerSimulator() #Qiskit 시뮬레이터 생성
@@ -18,7 +17,5 @@ result = simulator.run(qc, shots=1000).result() #회로를 1000번 실행하고 
 
 counts = result.get_counts()
 print(counts)
-
-histogram_figure = plot_histogram(counts)
-histogram_figure.savefig("results/x_gate_result.png")
+plot_histogram(counts)
 plt.show()
